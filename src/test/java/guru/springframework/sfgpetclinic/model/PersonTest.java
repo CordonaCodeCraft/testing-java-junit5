@@ -11,7 +11,7 @@ class PersonTest implements ModelTests {
     @Test
     void groupedAssertions() {
         //given
-        Person person = new Person(1l, "Joe", "Buck");
+        Person person = new Person(1L, "Joe", "Buck");
 
         //then
         assertAll("Test Props Set",
@@ -22,7 +22,7 @@ class PersonTest implements ModelTests {
     @Test
     void groupedAssertionMsgs() {
         //given
-        Person person = new Person(1l, "Joe", "Buck");
+        Person person = new Person(1L, "Joe", "Buck");
 
         //then
         assertAll("Test Props Set",
@@ -30,14 +30,5 @@ class PersonTest implements ModelTests {
                 () -> assertEquals(person.getLastName(), "Buck", "Last Name Failed"));
     }
 
-    @RepeatedTest(value = 10, name = "{displayName} : {currentRepetition} - {totalRepetitions}")
-    @DisplayName("My Repeated test")
-    void myRepeatedTest() {
-        //todo - impl
-    }
 
-    @RepeatedTest(5)
-    void myRepeatedTestWithDI(TestInfo testInfo, RepetitionInfo repetitionInfo) {
-        System.out.println(testInfo.getDisplayName() + ": " + repetitionInfo.getCurrentRepetition());
-    }
 }
