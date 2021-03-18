@@ -1,19 +1,15 @@
 package guru.springframework.sfgpetclinic.controllers;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.condition.*;
 
 import java.time.Duration;
 
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assumptions.assumeTrue;
-import static org.junit.jupiter.api.condition.JRE.*;
-import static org.junit.jupiter.api.condition.OS.*;
 
+@Tag("controllers")
 class IndexControllerTest {
 
     IndexController controller;
@@ -23,7 +19,7 @@ class IndexControllerTest {
         controller = new IndexController();
     }
 
-    @DisplayName("Test Proper View name is returned for index page ")
+    @DisplayName("Test Proper View name is returned for index page")
     @Test
     void index() {
         assertEquals("index", controller.index());
@@ -38,14 +34,18 @@ class IndexControllerTest {
     @Test
     @DisplayName("Test exception")
     void oupsHandler() {
-        assertThrows(ValueNotFoundException.class, () -> controller.oupsHandler());
+        assertThrows(ValueNotFoundException.class, () -> {
+            controller.oopsHandler();
+        });
     }
 
     @Disabled("Demo of timeout")
     @Test
     void testTimeOut() {
+
         assertTimeout(Duration.ofMillis(100), () -> {
             Thread.sleep(5000);
+
             System.out.println("I got here");
         });
     }
@@ -53,38 +53,42 @@ class IndexControllerTest {
     @Disabled("Demo of timeout")
     @Test
     void testTimeOutPrempt() {
+
         assertTimeoutPreemptively(Duration.ofMillis(100), () -> {
             Thread.sleep(5000);
-            System.out.println("I got here");
+
+            System.out.println("I got here 2342342342342");
         });
     }
 
     @Test
     void testAssumptionTrue() {
+
         assumeTrue("GURU".equalsIgnoreCase(System.getenv("GURU_RUNTIME")));
     }
 
     @Test
-    void testAssumptionTrueAsumptionIsTrue() {
+    void testAssumptionTrueAssumptionIsTrue() {
+
         assumeTrue("GURU".equalsIgnoreCase("GURU"));
     }
 
-    @EnabledOnOs(MAC)
+    @EnabledOnOs(OS.MAC)
     @Test
     void testMeOnMacOS() {
     }
 
-    @EnabledOnOs(WINDOWS)
+    @EnabledOnOs(OS.WINDOWS)
     @Test
     void testMeOnWindows() {
     }
 
-    @EnabledOnJre(JAVA_8)
+    @EnabledOnJre(JRE.JAVA_8)
     @Test
     void testMeOnJava8() {
     }
 
-    @EnabledOnJre(JAVA_11)
+    @EnabledOnJre(JRE.JAVA_11)
     @Test
     void testMeOnJava11() {
     }
